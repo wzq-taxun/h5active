@@ -10,40 +10,41 @@ new Vue({
         hotel_group_id: 1,
         hotel_id: 0,
         serverUrl: 'https://www.xpms.cn/',
+        // serverUrl: 'https://192.168.1.15:8080/',
         tel: '',
         show: false,
         showgetward: false,
         list: [
             {
-                home_url: './assets/images/cardvip.png',
+                home_url: './assets/images/VIP五折券.png ',
                 name: "一等奖"
             },
             {
-                home_url: "./assets/images/chartbei.png",
+                home_url: "./assets/images/定制杯子.png",
                 name: "参与奖"
             },
             {
-                home_url: "./assets/images/quan.png",
+                home_url: "./assets/images/住房抵用券.png",
                 name: "二等奖"
             },
             {
-                home_url: "./assets/images/chartbei.png",
+                home_url: "./assets/images/定制杯子.png",
                 name: "参与奖"
             },
             {
-                home_url: './assets/images/getwar.png',
+                home_url: './assets/images/智会员.png',
                 name: "三等奖"
             },
             {
-                home_url: "./assets/images/chartbei.png",
+                home_url: "./assets/images/定制杯子.png",
                 name: "参与奖"
             },
             {
-                home_url: './assets/images/yusan.png',
+                home_url: './assets/images/雨伞.png',
                 name: "四等奖"
             },
             {
-                home_url: "./assets/images/chartbei.png",
+                home_url: "./assets/images/定制杯子.png",
                 name: "参与奖"
             },
             {
@@ -53,53 +54,68 @@ new Vue({
         ],
         listall: [
             {
-                name: "一等奖",
-                title: '终身五折会员卡(1份)',
-                detail: '名巢酒店品牌旗下酒店均可用, 门市价五折消费。'
+                title: '一.活动时间:',
+                detail: '2020年9月6日正式营业'
             },
             {
-                name: "二等奖",
-                title: '一折住房抵用券(3份)',
-                detail: '名巢酒店品牌旗下酒店均可用, 限二次消费使用。'
+                title: '二.参与流程:',
+                detail: '开业期间,进店扫码关注公众号, 及客服管家号, 即可参与抽奖活动,奖品可当场换购。开业期间办理入住,另有神秘大礼相送。'
             },
             {
-                name: "三等奖",
-                title: '名巢智会员卡(10份)',
-                detail: '名巢酒店品牌专属智会员卡1张(价值99元包含优惠券礼品)。'
-            },
-            {
-                name: "四等奖",
-                title: '品牌定制雨伞(20份)',
-                detail: '名巢酒店品牌定制雨伞1把。'
-            },
-            {
-                name: "参与奖",
-                title: '订制随手磨砂杯(100份)',
-                detail: '名巢酒店品牌定制随手磨砂杯1个。'
-            },
+                title: '三.特别说明:',
+                detail: '同一微信ID/身份证持有者, 限抽奖一次。'
+            }
 
         ],
+        // listall: [
+        //     {
+        //         name: "一等奖",
+        //         title: '终身五折会员卡(1份)',
+        //         detail: '名巢酒店品牌旗下酒店均可用, 门市价五折消费。'
+        //     },
+        //     {
+        //         name: "二等奖",
+        //         title: '一折住房抵用券(3份)',
+        //         detail: '名巢酒店品牌旗下酒店均可用, 限二次消费使用。'
+        //     },
+        //     {
+        //         name: "三等奖",
+        //         title: '名巢智会员卡(10份)',
+        //         detail: '名巢酒店品牌专属智会员卡1张(价值99元包含优惠券礼品)。'
+        //     }
+        //     // {
+        //     //     name: "四等奖",
+        //     //     title: '品牌定制雨伞(20份)',
+        //     //     detail: '名巢酒店品牌定制雨伞1把。'
+        //     // },
+        //     // {
+        //     //     name: "参与奖",
+        //     //     title: '订制随手磨砂杯(100份)',
+        //     //     detail: '名巢酒店品牌定制随手磨砂杯1个。'
+        //     // },
+
+        // ],
         status: true,//是否开始抽奖
         select: null,//页面对应抽奖下标
         times: 0, // 奖品位置 0 - 7
         time: 0,//当前的旋转次数
-        speed: 60,//转盘速度
+        speed: 50,//转盘速度
         myVar: "",
         prize: "", //奖品名称
         num: 0,
-        turns: 4,//圈数
-        dingshi: '' // 定时器
+        turns: 5,//圈数
+        dingshi: '',// 定时器
+        // 第一次进入页面 判断 是否要提交手机号
+        issendma: true
     },
     created() {
         document.documentElement.style.fontSize = document.documentElement.clientWidth / 6.4 + 'px'
     },
     mounted() {
-        this.sjdhj()
-        this.onClose()
-        this.textbar = '请输入手机号,参与抽奖活动！！！'
+        // this.onClose()
+        // this.textbar = '请输入手机号,参与抽奖活动！！！'
     },
     beforeDestroy() {
-        clearInterval(this.dingshi)
         clearInterval(this.myVar);
     },
     watch: {
@@ -119,18 +135,6 @@ new Vue({
                 mathshu = 7
             }
             return mathshu
-        },
-        sjdhj() {
-            let that = this
-            let text = document.getElementById("ceshi");
-            if (text.style.border == "5px solid rgb(255, 148, 61)") {
-                text.style.border = "5px solid yellow";
-            } else {
-                text.style.border = "5px solid rgb(255, 148, 61)";
-            }
-            this.dingshi = setTimeout(() => {
-                that.sjdhj();
-            }, 100);
         },
         getggo() {
             this.heard = true
@@ -205,7 +209,6 @@ new Vue({
                         this.prize = this.list[this.select].name
                     }
                 }
-
             }
         },
         panduanselect(val) {
@@ -223,37 +226,46 @@ new Vue({
             }
         },
         sendward(e) {
-            // 当点击到抽奖时 发起亲求
-            axios.post(`${this.serverUrl}/mini/luckDraw/luckDraw/${this.hotel_group_id}/${this.hotel_id}/${this.tel}`)
-                .then(res => {
-                    // console.log(res)
-                    if (res.data && res.data.code === '00000') {
-                        if (res.data.data) {
-                            this.isfoushow = false
-                            this.isward = res.data.data
-                            this.shifouxian = true
-                            this.wardname = res.data.data.prize_name
-                            this.panduanselect(res.data.data.prize_id)
-                            if (this.status == true) {
-                                this.status = false
-                                this.myVar = setInterval(() => {
-                                    this.start(e)
-                                }, this.speed)
+            if (this.issendma) {
+                // 弹出 手机提交弹框
+                this.onClose()
+                this.textbar = '请输入手机号,参与抽奖活动！！！'
+                this.issendma = false
+                return
+            } else {
+                // 当点击到抽奖时 发起亲求
+                axios.post(`${this.serverUrl}/mini/luckDraw/luckDraw/${this.hotel_group_id}/${this.hotel_id}/${this.tel}`)
+                    .then(res => {
+                        // console.log(res)
+                        if (res.data && res.data.code === '00000') {
+                            if (res.data.data) {
+                                this.isfoushow = false
+                                this.isward = res.data.data
+                                this.shifouxian = true
+                                this.wardname = res.data.data.prize_name
+                                this.panduanselect(res.data.data.prize_id)
+                                if (this.status == true) {
+                                    this.status = false
+                                    this.myVar = setInterval(() => {
+                                        this.start(e)
+                                    }, this.speed)
+                                } else {
+                                    vant.Toast("抽奖进行中")
+                                }
+                                return
                             } else {
-                                vant.Toast("抽奖进行中")
+                                // return this.show = true
+                                vant.Toast(res.data.message || "你抽奖次数用完")
                             }
-                            return
-                        } else {
-                            // return this.show = true
-                            vant.Toast(res.data.message || "你抽奖次数用完")
                         }
-                    }
 
 
-                })
-                .catch(err => {
-                    console.error(err);
-                })
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    })
+            }
+
         },
         luck(e) {
             // console.log(e)

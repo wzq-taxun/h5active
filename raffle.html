@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>名巢限时抽奖</title>
+    <title>名巢美宿限时抽奖</title>
     <link rel="icon" href="./assets/images/icon-128x128.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.suoluomei.com/common/js2.0/npm/vant@2.2/lib/index.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/iconfont.css">
@@ -21,45 +21,48 @@
         <div class="noticebar">
             <van-notice-bar left-icon="volume-o" :scrollable="true" :text="textbar" />
         </div>
-        <div class="imghead">
-            <img src="./assets/images/pond-head.png" alt="">
+        <div class="titlebiao">
+            扫码关注即可参与抽奖
         </div>
-        <!--  -->
+        <div class="titlebiao" id="tifu">
+            开业期间办理入住, 另有神秘大礼
+        </div>
+        <div class="callpic">
+            <div class="calligraphy clearfix">
+                <div class="spans" v-for="(item,index) in list" :key="index"
+                    v-bind:class="[select == index && index != 8 ? 'aa' : '', '']" @click="luck(index)">
+                    <span style="display: block;width: 0.8rem;height: 0.8rem;" v-if="index !== 8">
+                        <img :src="item.home_url" alt="" style="width: 100%;height: 100%;">
+                    </span>
+                    <span style="display: block;" v-else>
+                        开始
+                    </span>
+                    <span style="display:block;">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+        <!--v-if="heard" -->
         <p class="detailzi" v-if="heard">
-            <van-divider @click="getjianggo()" :style="{ margin: '0px',color: '#ffffff', fontWeight:'900', borderColor: '#FFD342' ,
+            <van-divider @click="getjianggo()" :style="{ margin: '0px',color: '#975400', fontWeight:'900', borderColor: '#FFD342' ,
             padding: '0 0.213333rem' }">
                 <<中奖详情>>
             </van-divider>
         </p>
-        <div class="calligraphy" id="ceshi">
-            <div class="spans" v-for="(item,index) in list" :key="index"
-                v-bind:class="[select == index && index != 8 ? 'aa' : '', '']" @click="luck(index)">
-                <span style="display: block;width: 0.625rem;height: 0.625rem;" v-if="index !== 8">
-                    <img :src="item.home_url" alt="" style="width: 100%;height: 100%;">
-                </span>
-                <span style="display: block;" v-else>
-                    立即
-                </span>
-                <span style="display:block;">{{item.name}}</span>
-            </div>
-        </div>
-
-        <div class="rule">
-            <van-divider :style="{ color: '#ffffff', fontWeight:'900', borderColor: '#FFD342' ,
-                padding: '0 0.213333rem' }">
-                活动规则
+        <p class="detailzi" v-else>
+            <van-divider :style="{ margin: '0px',color: '#975400', fontWeight:'900', borderColor: '#FFD342' ,
+            padding: '0 0.213333rem' }">
+                <<抽奖说明>>
             </van-divider>
-            <ul class="rule-main">
-                <li v-for="(item, index) in listall">
-                    <div class="jiangji">{{item.name}}:</div>
-                    <div class="xiangjia">
-                        <p style="font-weight: 600;">{{item.title}}</p>
-                        <p style="color: #000;">{{item.detail}}</p>
-                    </div>
-                </li>
-            </ul>
+        </p>
+        <div id="activedong">
+            活动规则
         </div>
-        <!-- 页面加载时弹框 -->
+        <div id="footergui" v-for="(item,index) in listall" :key="index">
+            <h2>{{item.title}}</h2>
+            <p>{{item.detail}}</p>
+        </div>
+        <div id="jieshitext">本次活动最终解释权归名巢美宿所有,如有问题,请联系客服:400-0719-828</div>
+        <!-- 页面加载时弹框-->
         <van-popup v-model:show="show" class="moderkuang" :closeable="shifouxian" :close-on-click-overlay="false">
             <div>
                 <i class="iconfont icon-1_huaban1" style="color:#EC6538;font-size:100px;"></i>
@@ -81,7 +84,7 @@
             </div>
         </van-popup>
         <!-- 当抽完奖到停止时要显示的中奖结果 -->
-        <van-popup v-model:show="showgetward" class="moderkuang" closeable :close-on-click-overlay="false">
+        <van-popup v-model:show="showgetward" class="moderkuang"  :close-on-click-overlay="false">
             <div>
                 <i v-if="prize !=='参与奖'" class="iconfont icon-zhongjiangle"
                     style="color:#EC6538;font-size:1.333333rem;"></i>
