@@ -25,7 +25,8 @@
             扫码关注即可参与抽奖
         </div>
         <div class="titlebiao" id="tifu">
-            开业期间办理入住, 另有神秘大礼
+            <img src="./assets/images/2.png" alt="">
+            <div class="textzi">开业期间办理入住, 另有神秘大礼</div>
         </div>
         <div class="callpic">
             <div class="calligraphy clearfix">
@@ -49,15 +50,17 @@
             </van-divider>
         </p>
         <p class="detailzi" v-else>
-            <van-divider :style="{ margin: '0px',color: '#975400', fontWeight:'900', borderColor: '#FFD342' ,
+            <van-divider @click="getdengji()" :style="{ margin: '0px',color: '#975400', fontWeight:'900', borderColor: '#FFD342' ,
             padding: '0 0.213333rem' }">
-                <<抽奖说明>>
+                <<奖品说明>>
             </van-divider>
         </p>
         <div id="activedong">
-            活动规则
+            <img src="./assets/images/3.png" alt="">
+            <img src="./assets/images/1.png" alt="">
+            <div>活动规则</div>
         </div>
-        <div id="footergui" v-for="(item,index) in listall" :key="index">
+        <div id="footergui" v-for="(item,index) in listallgui" :key="index">
             <h2>{{item.title}}</h2>
             <p>{{item.detail}}</p>
         </div>
@@ -84,7 +87,7 @@
             </div>
         </van-popup>
         <!-- 当抽完奖到停止时要显示的中奖结果 -->
-        <van-popup v-model:show="showgetward" class="moderkuang"  :close-on-click-overlay="false">
+        <van-popup v-model:show="showgetward" class="moderkuang" :close-on-click-overlay="false">
             <div>
                 <i v-if="prize !=='参与奖'" class="iconfont icon-zhongjiangle"
                     style="color:#EC6538;font-size:1.333333rem;"></i>
@@ -101,6 +104,20 @@
                     @click="getggo()">领取</van-button>
                 <van-button v-else type="warning" round style="padding: 0 0.933333rem;" @click="getggo()">领取
                 </van-button>
+            </div>
+        </van-popup>
+        <!-- 点击抽奖说明后会弹出奖品等级说明 -->
+        <van-popup v-model:show="showmodeji" class="moderdengji" closeable :close-on-click-overlay="true">
+            <div class="rule">
+                <ul class="rule-main">
+                    <li v-for="(item, index) in listall">
+                        <div class="jiangji">{{item.name}}:</div>
+                        <div class="xiangjia">
+                            <p style="font-weight: 600;">{{item.title}}</p>
+                            <p style="color: #333;">{{item.detail}}</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </van-popup>
     </div>

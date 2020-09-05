@@ -1,16 +1,16 @@
 new Vue({
     el: "#Vue",
     data: {
+        showmodeji: false,
         heard: false,
         shifouxian: false,
         wardname: '',
-        textbar: '',
+        textbar: '亲爱的小伙伴, 欢迎来到名巢美宿, 抽奖活动进行中, 赶快参与吧',
         isward: {},
         isfoushow: true,
         hotel_group_id: 1,
         hotel_id: 0,
         serverUrl: 'https://www.xpms.cn/',
-        // serverUrl: 'https://192.168.1.15:8080/',
         tel: '',
         show: false,
         showgetward: false,
@@ -52,7 +52,7 @@ new Vue({
                 name: "抽奖"
             },
         ],
-        listall: [
+        listallgui: [
             {
                 title: '一.活动时间:',
                 detail: '2020年9月6日正式营业'
@@ -67,34 +67,33 @@ new Vue({
             }
 
         ],
-        // listall: [
-        //     {
-        //         name: "一等奖",
-        //         title: '终身五折会员卡(1份)',
-        //         detail: '名巢酒店品牌旗下酒店均可用, 门市价五折消费。'
-        //     },
-        //     {
-        //         name: "二等奖",
-        //         title: '一折住房抵用券(3份)',
-        //         detail: '名巢酒店品牌旗下酒店均可用, 限二次消费使用。'
-        //     },
-        //     {
-        //         name: "三等奖",
-        //         title: '名巢智会员卡(10份)',
-        //         detail: '名巢酒店品牌专属智会员卡1张(价值99元包含优惠券礼品)。'
-        //     }
-        //     // {
-        //     //     name: "四等奖",
-        //     //     title: '品牌定制雨伞(20份)',
-        //     //     detail: '名巢酒店品牌定制雨伞1把。'
-        //     // },
-        //     // {
-        //     //     name: "参与奖",
-        //     //     title: '订制随手磨砂杯(100份)',
-        //     //     detail: '名巢酒店品牌定制随手磨砂杯1个。'
-        //     // },
-
-        // ],
+        listall: [
+            {
+                name: "一等奖",
+                title: '终身五折会员卡(1份)',
+                detail: '名巢酒店品牌旗下酒店均可用, 门市价五折消费。'
+            },
+            {
+                name: "二等奖",
+                title: '一折住房抵用券(3份)',
+                detail: '名巢酒店品牌旗下酒店均可用, 限二次消费使用。'
+            },
+            {
+                name: "三等奖",
+                title: '名巢智会员卡(10份)',
+                detail: '名巢酒店品牌专属智会员卡1张(价值99元包含优惠券礼品)。'
+            },
+            {
+                name: "四等奖",
+                title: '品牌定制雨伞(20份)',
+                detail: '名巢酒店品牌定制雨伞1把。'
+            },
+            {
+                name: "参与奖",
+                title: '订制随手磨砂杯(100份)',
+                detail: '名巢酒店品牌定制随手磨砂杯1个。'
+            },
+        ],
         status: true,//是否开始抽奖
         select: null,//页面对应抽奖下标
         times: 0, // 奖品位置 0 - 7
@@ -112,8 +111,6 @@ new Vue({
         document.documentElement.style.fontSize = document.documentElement.clientWidth / 6.4 + 'px'
     },
     mounted() {
-        // this.onClose()
-        // this.textbar = '请输入手机号,参与抽奖活动！！！'
     },
     beforeDestroy() {
         clearInterval(this.myVar);
@@ -144,7 +141,9 @@ new Vue({
             this.textbar = '温馨提示: 该手机号已参加过抽奖, 中奖结果如下, 请尽快前往附近名巢酒店,使用手机号领取使用。'
             this.show = true
         },
-        checkPhone() {
+        // 抽奖等级
+        getdengji() {
+            this.showmodeji = true
         },
         tijiaoshijian(e) {
             // 不能为空
@@ -268,7 +267,6 @@ new Vue({
 
         },
         luck(e) {
-            // console.log(e)
             this.prize = ""
             if (e === 8) {
                 this.sendward(e)

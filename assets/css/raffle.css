@@ -22,7 +22,7 @@ li {
 #Vue {
     width: 100%;
     height: 18.75rem;
-    background: url(../images/1.jpg) no-repeat center;
+    background: url(../images/1old.jpg) no-repeat center;
     background-size:100% 100%;
 }
 .noticebar {
@@ -48,19 +48,49 @@ li {
     padding-left: 0.15625rem;
     top: 0.7rem;
     font-size: 0.28rem;
+    width:70%;
+    height: 0.625rem;
+}
+#tifu>.textzi,
+#tifu>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+#tifu>.textzi{
+    top: 0.0625rem;
+    z-index: 900;
+    width: 100%;
+    height: 100%;
 }
 #activedong {
     position: relative;
-    top: 2.73rem;
+    top: 2.5rem;
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
-    width:90%;
+    width:60%;
     color: #606072;
     font-weight: 700;
     padding-left: 0.1875rem;
     bottom: 0.0625rem;
     font-size: 0.3rem;
+}
+#activedong>img:nth-child(1) {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#activedong>img:nth-child(2) {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 #jieshitext,
 #footergui {
@@ -210,4 +240,46 @@ li {
     flex-direction: column;
     align-items: center;
     font-size: 0.213333rem
+}
+.moderdengji {
+    width: 90%;
+    border-radius: 0.625rem;
+    border: 5px solid rgb(255, 148, 61);
+    border-radius: 0.266667rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+.moderdengji>.rule {
+    box-sizing: border-box;
+    width: 80%;
+    height: 100%;
+    font-size: 0.213333rem;
+    margin-top: 0.625rem;
+}
+.rule>.rule-main {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.rule-main>li {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0.1875rem 0rem;
+}
+
+.rule-main>li>.jiangji {
+    font-size: 0.25rem;
+    font-weight: 900;
+    width: 20%;
+}
+
+.rule-main>li>.xiangjia {
+    width: 80%;
+    padding-left: 0;
+    margin-left: 0;
 }
